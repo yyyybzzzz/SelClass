@@ -63,10 +63,3 @@ class Login(object):
         # 获取eid
         self.EID = self.getEID()
         print(self.cookies, self.EID)
-
-
-l = Login(
-    '2018110704', '06042415',
-    'https://auth.bupt.edu.cn/authserver/login?service=http://yjxt.bupt.edu.cn/ULogin.aspx'
-)
-l.login()
