@@ -37,8 +37,8 @@ class Login(object):
         res = requests.post(self.url, data=data, headers=headers)
         return res.history[1].cookies
 
-    # 获取Eid
-    def getEID(self):
+    # 获取url
+    def getUrl(self):
         url = 'http://yjxt.bupt.edu.cn/Gstudent/leftmenu.aspx?UID=' + self.uname
         headers = {
             'Content-Type':
@@ -51,15 +51,16 @@ class Login(object):
         res = requests.get(url, headers=headers)
         html = res.text
         patern = r'Course/PlanCourseOnlineSel.aspx\?EID=[a-z|A-Z|0-9|=]*'
-        eid = re.findall(re.compile(patern), html)[0][36:]
-        return eid
+        url = 'http://yjxt.bupt.edu.cn/Gstudent/' + re.findall(
+            re.compile(patern), html)[0] + '&UID=' + self.uname
+        return url
 
-    # 返回eid和cookies
+    # 返回URL和cookies
     def login(self):
 
         # 获取 cookie
         cookie = self.getCookies()
         self.cookies = 'DropDownListYx_xsbh=DropDownListYx_xsbh=; DropDownListXqu=DropDownListXqu=1; ASP.NET_SessionId=' + cookie['ASP.NET_SessionId']
-        # 获取eid
-        self.EID = self.getEID()
-        print(self.cookies, self.EID)
+        # 获取url
+        url = self.getUrl()
+        return url, self.cookies
