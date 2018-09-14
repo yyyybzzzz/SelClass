@@ -78,10 +78,8 @@ class Course(object):
                 btn = tr.findAll('input', {'type': 'image'})[0]['name']
                 payload['ctl100$ScriptManager1'] = btn
                 self.url = 'http://yjxt.bupt.edu.cn/Gstudent/Course/' + form['action']
-                payload['ctl00$contentParent$dgData$ctl02$ImageButton1.x'] = 11
-                payload['ctl00$contentParent$dgData$ctl02$ImageButton1.y'] = 7
-            # print(payload)
-        res = requests.post(self.url, headers=headers, data=payload)
-        print(res.text)
+                payload['ctl00$contentParent$dgData$ctl02$ImageButton1.x'] = 13
+                payload['ctl00$contentParent$dgData$ctl02$ImageButton1.y'] = 8
+                res = requests.post(self.url, headers=headers, data=payload)
+                print("选课完成")
 
-    # def select(self, courseId, className):
